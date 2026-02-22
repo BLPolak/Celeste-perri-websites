@@ -1,0 +1,24 @@
+name: Deploy to mijndomein.nl
+
+on:
+  push:
+    branches:
+      - claude/claude-md-mlxlf0fs54ehryvl-IsFFn
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Deploy via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: 194.213.127.95
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: /httpdocs/
+          exclude: |
+            **/.git*
+            **/.git*/**
+            .github/**
