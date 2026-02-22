@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Celeste Perri — Author</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@200;300&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #f5f1eb;
+      --ink: #1a1814;
+      --muted: #8a8680;
+      --accent: #c8a96e;
+    }
+
+    html, body {
+      height: 100%;
+    }
+
+    body {
+      background-color: var(--cream);
+      color: var(--ink);
+      font-family: 'Jost', sans-serif;
+      font-weight: 200;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 2rem;
+      text-align: center;
+      letter-spacing: 0.02em;
+      position: relative;
+    }
+
+    /* Photo background — face + neck centred */
+    .bg-photo {
+      position: fixed;
+      inset: 0;
+      background-image: url('celeste-bg.jpeg');
+      background-size: cover;
+      background-position: center 35%;
+      opacity: 0.12;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* Cream fade at top and bottom so text stays readable */
+    .bg-photo::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        var(--cream) 0%,
+        transparent 25%,
+        transparent 75%,
+        var(--cream) 100%
+      );
+    }
+
+    /* Subtle grain overlay */
+    .grain {
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.5;
+    }
+
+    .container {
+      position: relative;
+      z-index: 2;
+      max-width: 560px;
+      animation: fadeUp 1.4s ease both;
+    }
+
+    .rule {
+      width: 40px;
+      height: 1px;
+      background: var(--accent);
+      margin: 0 auto 2.5rem;
+    }
+
+    .name {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(2.8rem, 8vw, 5rem);
+      line-height: 1.05;
+      letter-spacing: 0.04em;
+      margin-bottom: 0.3rem;
+    }
+
+    .name em {
+      font-style: italic;
+      color: var(--muted);
+    }
+
+    .label {
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 3rem;
+    }
+
+    .divider {
+      width: 1px;
+      height: 48px;
+      background: linear-gradient(to bottom, var(--accent), transparent);
+      margin: 0 auto 3rem;
+    }
+
+    .message {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(1.1rem, 3vw, 1.35rem);
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 3.5rem;
+    }
+
+    .footer-rule {
+      width: 40px;
+      height: 1px;
+      background: var(--accent);
+      margin: 0 auto;
+      opacity: 0.5;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-photo"></div>
+  <div class="grain"></div>
+  <div class="container">
+    <div class="rule"></div>
+    <h1 class="name">Celeste <em>Perri</em></h1>
+
+    <div class="divider"></div>
+    <p class="message">
+      This page is a placeholder for the official website<br>of Celeste Perri.<br><br>
+      More information will follow at a later date.
+    </p>
+    <div class="footer-rule"></div>
+  </div>
+</body>
+</html>
