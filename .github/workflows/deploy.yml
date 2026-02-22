@@ -19,11 +19,13 @@ jobs:
           FTP_USER: ${{ secrets.FTP_USERNAME }}
           FTP_PASS: ${{ secrets.FTP_PASSWORD }}
         run: |
-          lftp -u "$FTP_USER","$FTP_PASS" -e "
-            set ftp:ssl-force true;
-            set ftp:ssl-protect-data true;
-            set ssl:verify-certificate false;
-            set dns:order "inet";
-            mirror -R --delete --parallel=5 --exclude-glob .git/ --exclude-glob .github/ . /httpdocs/;
-            quit
-          " ftp://194.213.127.95
+          cat > /tmp/lftp_script << EOF
+          set ftp:ssl-force true
+          set ftp:ssl-protect-data true
+          set ssl:verify-certificate false
+          set dns:order "inet"
+          open -u $FTP_USER,$FTP_PASS ftp://194.213.127.95
+          mirror -R --delete --parallel=5 --exclude-glob .git/ --exclude-glob .github/ . /httpdocs/
+          quit
+          EOF
+          lftp -f /tmp/lftp_script
