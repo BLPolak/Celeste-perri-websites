@@ -3,7 +3,7 @@ name: Deploy to mijndomein.nl
 on:
   push:
     branches:
-      - claude/claude-md-mlxlf0fs54ehryvl-IsFFn
+      - main
 
 jobs:
   deploy:
