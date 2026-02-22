@@ -11,15 +11,19 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Deploy via FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: 194.213.127.95
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          protocol: ftps-legacy
-          server-dir: /httpdocs/
-          exclude: |
-            **/.git*
-            **/.git*/**
-            .github/**
+      - name: Install lftp
+        run: sudo apt-get install -y lftp
+
+      - name: Deploy via FTPS
+        env:
+          FTP_USER: ${{ secrets.FTP_USERNAME }}
+          FTP_PASS: ${{ secrets.FTP_PASSWORD }}
+        run: |
+          lftp -u "$FTP_USER","$FTP_PASS" -e "
+            set ftp:ssl-force true;
+            set ftp:ssl-protect-data true;
+            set ssl:verify-certificate false;
+            set net:socket-bind-ipv4 true;
+            mirror -R --delete --parallel=5 --exclude-glob .git/ --exclude-glob .github/ . /httpdocs/;
+            quit
+          " ftp://194.213.127.95
