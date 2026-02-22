@@ -23,7 +23,7 @@ jobs:
             set ftp:ssl-force true;
             set ftp:ssl-protect-data true;
             set ssl:verify-certificate false;
-            set net:socket-bind-ipv4 true;
+            set dns:order "inet";
             mirror -R --delete --parallel=5 --exclude-glob .git/ --exclude-glob .github/ . /httpdocs/;
             quit
           " ftp://194.213.127.95
