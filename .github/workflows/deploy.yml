@@ -32,8 +32,8 @@ jobs:
 
       - name: Deploy .nl site (Dutch)
         env:
-          FTP_USER: ${{ secrets.FTP_USERNAME }}
-          FTP_PASS: ${{ secrets.FTP_PASSWORD }}
+          FTP_USER: ${{ secrets.FTP_USERNAME_NL }}
+          FTP_PASS: ${{ secrets.FTP_PASSWORD_NL }}
         run: |
           cat > /tmp/lftp_nl << EOF
           set ftp:ssl-force true
@@ -41,7 +41,7 @@ jobs:
           set ssl:verify-certificate false
           set dns:order "inet"
           open -u $FTP_USER,$FTP_PASS ftp://194.213.127.95
-          mirror -R --delete --parallel=5 nl/ __NL_HTTPDOCS_PATH__
+          mirror -R --delete --parallel=5 nl/ /httpdocs/
           quit
           EOF
           lftp -f /tmp/lftp_nl
