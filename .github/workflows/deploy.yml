@@ -26,7 +26,7 @@ jobs:
           set ssl:verify-certificate false
           set dns:order "inet"
           open -u $FTP_USER,$FTP_PASS ftp://194.213.127.95
-          mirror -R --delete --parallel=5 --exclude-glob .git/ --exclude-glob .github/ --exclude-glob nl/ . /httpdocs/
+          mirror -R --delete --parallel=5 --ignore-time --exclude-glob .git/ --exclude-glob .github/ --exclude-glob nl/ . /httpdocs/
           quit
           EOF
           lftp -f /tmp/lftp_com
