@@ -25,8 +25,13 @@ jobs:
           set ftp:ssl-protect-data true
           set ssl:verify-certificate false
           set dns:order "inet"
+          set cmd:verbose true
           open -u $FTP_USER,$FTP_PASS ftp://194.213.127.95
-          mirror -R --delete --parallel=5 --ignore-time --exclude-glob .git/ --exclude-glob .github/ --exclude-glob nl/ . /httpdocs/
+          echo "=== Contents of /httpdocs/ before deploy ==="
+          ls /httpdocs/
+          mirror -R --delete --verbose --parallel=5 --ignore-time --exclude-glob .git/ --exclude-glob .github/ --exclude-glob nl/ . /httpdocs/
+          echo "=== Contents of /httpdocs/ after deploy ==="
+          ls /httpdocs/
           quit
           EOF
           lftp -f /tmp/lftp_com
