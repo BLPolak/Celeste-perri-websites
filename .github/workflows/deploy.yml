@@ -29,7 +29,7 @@ jobs:
           open -u $FTP_USER,$FTP_PASS ftp://194.213.127.95
           echo "=== Contents of /httpdocs/ before deploy ==="
           ls /httpdocs/
-          mirror -R --delete --verbose --parallel=5 --ignore-time --exclude-glob .git/ --exclude-glob .github/ --exclude-glob nl/ . /httpdocs/
+          mirror -R --delete --verbose --parallel=5 --ignore-time --exclude-glob .git/ --exclude-glob .github/ --exclude-glob nl/ . /
           echo "=== Contents of /httpdocs/ after deploy ==="
           ls /httpdocs/
           quit
